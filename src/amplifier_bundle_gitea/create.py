@@ -32,6 +32,7 @@ def create_environment(
     network_alias: str | None,
     add_host: tuple[str, ...],
     hostname: str | None,
+    volumes: dict | None = None,
 ) -> dict:
     """Create a new Gitea environment.
 
@@ -86,6 +87,8 @@ def create_environment(
         run_kwargs["hostname"] = hostname
     if add_host:
         run_kwargs["extra_hosts"] = list(add_host)
+    if volumes:
+        run_kwargs["volumes"] = volumes
 
     container = None
     try:
